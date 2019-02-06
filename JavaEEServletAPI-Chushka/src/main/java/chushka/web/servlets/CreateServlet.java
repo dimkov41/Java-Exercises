@@ -1,8 +1,10 @@
 package chushka.web.servlets;
 
 import chushka.domain.entity.enums.Type;
+import chushka.domain.models.binding.ProductBindingModel;
 import chushka.domain.models.service.ProductServiceModel;
 import chushka.service.ProductService;
+import chushka.util.ModelMapper;
 import chushka.util.ViewProvider;
 
 import javax.inject.Inject;
@@ -16,11 +18,13 @@ import java.io.IOException;
 @WebServlet("/create/product")
 public class CreateServlet extends HttpServlet {
     private ViewProvider viewProvider;
+    private ModelMapper modelMapper;
     private ProductService productService;
 
     @Inject
-    public CreateServlet(ViewProvider viewProvider, ProductService productService) {
+    public CreateServlet(ViewProvider viewProvider, ModelMapper modelMapper, ProductService productService) {
         this.viewProvider = viewProvider;
+        this.modelMapper = modelMapper;
         this.productService = productService;
     }
 
@@ -35,8 +39,8 @@ public class CreateServlet extends HttpServlet {
         String name = req.getParameter("name");
         String desc = req.getParameter("description");
         String type = req.getParameter("type");
-        ProductServiceModel productServiceModel = new ProductServiceModel(name,desc,type);
-        this.productService.save(productServiceModel);
+        ProductBindingModel productBindingModel = new ProductBindingModel(name,desc,type);
+        this.productService.save(this.modelMapper.map(productBindingModel,ProductServiceModel.class));
 
         resp.sendRedirect("/");
     }

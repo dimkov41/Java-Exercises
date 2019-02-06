@@ -1,14 +1,11 @@
-package chushka.domain.models.service;
+package chushka.domain.models.binding;
 
-public class ProductServiceModel {
+public class ProductBindingModel {
     private String name;
     private String description;
     private String type;
 
-    public ProductServiceModel() {
-    }
-
-    public ProductServiceModel(String name, String description, String type) {
+    public ProductBindingModel(String name, String description, String type) {
         this.name = name;
         this.description = description;
         this.type = type;
