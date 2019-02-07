@@ -47,7 +47,6 @@ public class ProductServiceImpl implements ProductService {
         if(this.productRepository.findByName(name) == null){
             return null;
         }
-        ProductViewModel productViewModel = this.modelMapper.map(this.productRepository.findByName(name),ProductViewModel.class);
-        return productViewModel;
+        return this.modelMapper.map(this.productRepository.findByName(name),ProductViewModel.class);
     }
 }
