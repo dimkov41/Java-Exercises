@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templates/base-layout.xhtml">
+    <ui:define name="main-content">
+        <div class="jumbotron justify-content-center jumbotron-background">
+            <div class="row">
+                <div class="col col-md-12 d-flex justify-content-center">
+                    <h1>Create Cat!</h1>
+                </div>
+            </div>
+            <hr class="hr-background"/>
+            <h:form>
+                <p:growl id="messages" showDetail="true" />
+                <div class="row">
+                    <div class="col-md-12  d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="catName" value="Name"/>
+                            <h:inputText styleClass="form-control"
+                                         id="catName"
+                                         value="#{catRegisterBean.catRegisterBindingModel.name}"
+                                         required="true" requiredMessage="Name is required" >
+                                <f:validateLength minimum="1" maximum="20" for="catName"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="catBreed" value="Breed"/>
+                            <h:inputText styleClass="form-control" id="catBreed"
+                                         value="#{catRegisterBean.catRegisterBindingModel.breed}" required="true" requiredMessage="Breed is required">
+                                <f:validateLength minimum="1" maximum="20" for="catBreed"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="catColor" value="Color"/>
+                            <h:inputText id="catColor" styleClass="form-control"
+                                         value="#{catRegisterBean.catRegisterBindingModel.color}" required="true" requiredMessage="Color is required">
+                                <f:validateLength minimum="1" maximum="20" for="catColor"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="catAge" value="Age"/>
+                            <h:inputText id="catAge" styleClass="form-control"
+                                         value="#{catRegisterBean.catRegisterBindingModel.age}"
+                                         onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false"
+                                         required="true" requiredMessage="Age is requred" >
+                                <f:validateLength minimum="1" maximum="2" for="catAge"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group">
+                            <h:outputLabel for="catPrice" value="Price"/>
+                            <h:inputText id="catPrice" styleClass="form-control" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false" value="#{catRegisterBean.catRegisterBindingModel.price}"
+                                         required="true" requiredMessage="Price is required">
+                                <f:validateLength minimum="1" for="catPrice"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <h:outputLabel for="genderRadio" value="Gender" />
+                        <h:selectOneRadio value="#{catRegisterBean.catRegisterBindingModel.gender}" id="genderRadio" required="true"
+                                          requiredMessage="Gender is required">
+                            <f:selectItem itemValue="Male" />
+                            <f:selectItem itemValue="Female"/>
+                        </h:selectOneRadio>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-check">
+                            <h:selectBooleanCheckbox id="hasPassport" styleClass="form-check-input" value="#{catRegisterBean.catRegisterBindingModel.hasPassport}"/>
+                            <h:outputLabel styleClass="form-check-label mr-4" value="Has Passport" for="hasPassport" />
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-check">
+                            <p:outputLabel for="calendar" value="Added On:" />
+                            <p:calendar id="calendar" value="#{catRegisterBean.catRegisterBindingModel.addedOn}" required="true"
+                                        requiredMessage="Added on date is reqiured">
+                                <p:ajax event="dateSelect" listener="#{catRegisterBean.onDateSelect}" update="messages" />
+                            </p:calendar>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hr-background"/>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <h:commandButton value="Create cat" class="btn btn-success" action="#{catRegisterBean.register}"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

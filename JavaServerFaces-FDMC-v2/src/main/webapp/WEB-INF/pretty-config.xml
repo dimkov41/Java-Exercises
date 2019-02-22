@@ -1,0 +1,21 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <url-mapping id="index">
+        <pattern value="/" />
+        <view-id value="/jsf/index.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="createCat">
+        <pattern value="/cat-create" />
+        <view-id value="/jsf/cat-create.xhtml" />
+    </url-mapping>
+
+    <url-mapping id="allCats">
+        <pattern value="/all-cats" />
+        <view-id value="/jsf/all-cats.xhtml" />
+    </url-mapping>
+
+</pretty-config>
